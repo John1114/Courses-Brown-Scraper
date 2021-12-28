@@ -1,3 +1,6 @@
+# This file creates a courses.csv file with all the courses in all the terms (in the most 
+# recent 4 years), and their info.
+
 # Make sure to first install selenium ('pip3 install selenium'), and the
 # browser driver:
 # https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/
