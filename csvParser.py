@@ -1,9 +1,11 @@
 import csv
 import re
 
+
 def useRegex(input):
     pattern = re.compile(r"[a-zA-Z]+\\[a-zA-Z]{2}[0-9]{5}")
-    return pattern.match(input, re.IGNORECASE)
+    return pattern.search(input, re.IGNORECASE)
+
 
 with open('courses.csv') as csv_file:
     csv_reader = csv.reader(csv_file)
@@ -14,8 +16,6 @@ with open('courses.csv') as csv_file:
             line_count += 1
         else:
             temp = useRegex(row[6])
-            if temp != None:
+            if temp is not None:
                 print(temp)
-            line_count+=1
-
-
+            line_count += 1
