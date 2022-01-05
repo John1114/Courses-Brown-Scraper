@@ -1,5 +1,10 @@
 /* Affects the entire body of the HTML (unless otherwise specified) */
 body {
     height: 100%;
-    background-color: rgb(255, 245, 248);
+    background-color: rgb(254, 228, 236);
+}
+
+.navbar-grey {
+    background-color: #a0a0a0;
+    color: rgb(26, 0, 0);
 }
