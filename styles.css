@@ -3,3 +3,8 @@ body {
     height: 100%;
     background-color: rgb(254, 228, 236);
 }
+
+.btn-grey {
+    background-color: #cfcfcf;
+    color: black;
+}
