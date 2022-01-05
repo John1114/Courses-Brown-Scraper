@@ -15,9 +15,11 @@ def useRegexToFilterPreReqs(input):
 
 with open('courses.csv') as csv_file:
     csv_reader = csv.reader(csv_file)
-    csv_writer = csv.writer(csv_file)
+    writableFile = open('courses2.csv', "w")
+    csv_writer = csv.writer(writableFile)
     line_count = 0
     out = ""
+    out_list = []
     for row in csv_reader:
         if line_count == 0:
             print(f'Column names are {", ".join(row)}')
@@ -26,6 +28,9 @@ with open('courses.csv') as csv_file:
             temp = useRegexToFindPreReqs(row[6])
             if temp is not None:
                 out += temp.group(0)
+            row[4] = out
+            csv_writer.writerow(row)
             line_count += 1
+            out_list.append(out)
             print(out)
             out = ""
