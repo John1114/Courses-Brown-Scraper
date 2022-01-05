@@ -1,7 +1,5 @@
 /* Affects the entire body of the HTML (unless otherwise specified) */
 body {
-    margin: 25px;
     background-color: rgb(245, 222, 230);
-    font-family: garamond, serif;
     font-size: 14px;
 }
