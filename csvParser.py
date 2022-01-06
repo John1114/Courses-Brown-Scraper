@@ -5,7 +5,7 @@ import string
 
 def useRegexToFindPreReqs(input):
     pattern = re.compile(r"[a-zA-Z]+\\[a-zA-Z]{2}[0-9]{5}")
-    return pattern.search(input, re.IGNORECASE)
+    return pattern.findall(input, re.IGNORECASE)
 
 
 def useRegexToFilterPreReqs(input):
@@ -27,10 +27,11 @@ with open('courses.csv') as csv_file:
         else:
             temp = useRegexToFindPreReqs(row[6])
             if temp is not None:
-                out += temp.group(0)
+                out_list.append(temp)
+                out = out.join(map(str, temp))
             row[4] = out
             csv_writer.writerow(row)
             line_count += 1
             out_list.append(out)
-            print(out)
+            # print(out)
             out = ""
