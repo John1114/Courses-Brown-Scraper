@@ -16,10 +16,14 @@
     <!-- Our CSS file-->
     <link rel="stylesheet" href="styles.css">
 
+    <!-- D3 JS file-->
+    <script src="https://d3js.org/d3.v4.js"></script>
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="https://john1114.github.io/Courses-Brown-Scraper/minecraft_bear.png"/>
 
     <title>Hello, world!</title>
+
   </head>
   <body>
     <!-- Navbar -->
@@ -31,23 +35,48 @@
     </nav>
     <br>
     <!-- Cards -->
-    <div class="container">
-      <div class="row">
-        <div class="col-3">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-4">
           <div class="card">
             <div class="card-body">
               <form>
                 <div class="form-group">
                   <label for="formGroupExampleInput">Search for your course</label>
-                  <input type="text" class="form-control" id="courseFeild" placeholder="Eg. CSCI 0170">
+                  <input type="text" class="form-control" id="courseFeild" value="" placeholder="Eg. CSCI 0170">
                   <br>
                   <button type="submit" class="btn-grey btn" onclick="searchCourse();">Search</button>
                 </div>
               </form>
+              <hr>
+              <div class="list-group">
+                <div class="list-group-item list-group-item-action list-group-item-secondary">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">CSCI 0200: Program Design with Data Structures and Algorithms</h5>
+                  </div>
+                  <small>Students extend their program-design skills while learning multiple data structures, common graph algorithms, different forms of societal impacts from programs, how to analyze programs for performance, and how to work effectively with multiple styles of programming languages. Examples and course projects draw from several areas of computer science to help students identify their broader interests within the field. There will be a required weekly lab session involving hands-on work with course material. Prerequisite: CSCI 0112, CSCI 0150, 0170, or CSCI 0190. In addition, CSCI 0111 can be used with both additional work and the instructor's permission. The first two weeks of the course will be taught as at least two parallel tracks based on which prerequisite course a student has taken.</small>
+                </div>
+                <a href="#" class="list-group-item list-group-item-action">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                  </div>
+                  <p class="mb-1">Some placeholder content in a paragraph.</p>
+                  <small class="text-muted">And some muted small print.</small>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                  </div>
+                  <p class="mb-1">Some placeholder content in a paragraph.</p>
+                  <small class="text-muted">And some muted small print.</small>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-7">
           <div class="card">
             <h5 class="card-header">Course Map</h5>
             <div class="card-body">
@@ -65,9 +94,18 @@
     <!-- Our JavaScript File-->
     <script src="lemagic.js"></script>
     <script type="text/javascript">
+      d3.csv("http://localhost/Courses-Brown-Scraper/courses.csv", function(error, data) {
+        if (error) throw error;
+            console.log(data);
+            //format data if required...
+            //draw chart
+      });
+      let course_code = document.cookie.split('=')[1];
+      document.getElementById("courseFeild").value = course_code;
+
       function searchCourse() {
-        alert(document.getElementById("courseFeild").value)
-        location.href = "index2.html?code=" + document.getElementById("courseFeild").value;
+        document.cookie = "code="+document.getElementById("courseFeild").value;
+        location.reload();
       }
     </script>
   </body>
