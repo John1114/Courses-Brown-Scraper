@@ -21,7 +21,7 @@ with open('courses.csv') as csv_file:
     out = ""
     out_list = []
     header = ['code', 'subject', 'terms', 'name', 'prereqs', 'postreqs', 'info']
-    writer.writerow(header)
+    csv_writer.writerow(header)
     for row in csv_reader:
         if line_count == 0:
             print(f'Column names are {", ".join(row)}')
