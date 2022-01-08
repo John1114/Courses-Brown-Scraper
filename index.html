@@ -95,37 +95,5 @@
     <script src="lemagic.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="jquery-csv.js"></script>
-    <script type="text/javascript">
-      d3.csv("http://localhost/Courses-Brown-Scraper/courses2.csv", function(error, data) {
-        if (error) throw error;
-            console.log(data);
-            //format data if required...
-            //draw chart
-      });
-      let course_code = document.cookie.split('=')[1];
-      document.getElementById("courseFeild").value = course_code;
-      if (course_code == "") {
-        document.getElementById("resultCourse1").hidden = true
-        document.getElementById("resultCourse2").hidden = true
-        document.getElementById("resultCourse3").hidden = true
-        console.log("a"+course_code)
-      } else {
-        document.getElementById("resultCourse1").hidden = false
-        document.getElementById("resultCourse2").hidden = false
-        document.getElementById("resultCourse3").hidden = false
-        console.log("b"+course_code)
-      }
-      function searchCourse() {
-        console.log("what")
-        document.cookie = "code="+document.getElementById("courseFeild").value;
-        let course_code = document.cookie.split('=')[1];
-        window.location.href="http://localhost/Courses-Brown-Scraper/index.html";
-      }
-      function setCookie() {
-        console.log("what2")
-        document.cookie = "code="+document.getElementById("courseFeild").value;
-        let course_code = document.cookie.split('=')[1];
-      }
-    </script>
-  </body>
+      </body>
 </html>
