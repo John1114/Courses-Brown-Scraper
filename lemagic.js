@@ -34879,10 +34879,14 @@ const data = [
 function searchCourse(){
     const course = document.getElementById("courseFeild").value;
     let prereq = findPrereq(course).prereqs;
-    document.getElementById("prereqDisplay").innerHTML = "Prerequisites: " + prereq;
-    console.log(prereq);
+    document.getElementById("prereqDisplay").innerHTML = "Prerequisites: " + formatClass(prereq);
+    console.log(formatClass(prereq));
 }
 
 function findPrereq(courseName){
     return data.find((element) => (element.code === courseName));
+}
+
+function formatClass(courseName){
+    return courseName.split("\\xa0").join(' ');
 }
