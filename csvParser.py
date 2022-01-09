@@ -37,3 +37,4 @@ with open('courses.csv') as csv_file:
             out_list.append(out)
             # print(out)
             out = ""
+
