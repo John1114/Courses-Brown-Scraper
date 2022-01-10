@@ -114,7 +114,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="jquery-csv.js"></script>
     <script type="text/javascript">
-      d3.csv("http://localhost/Courses-Brown-Scraper/courses2.csv", function(data) {
+      d3.csv("https://john1114.github.io/Courses-Brown-Scraper/courses2.csv", function(data) {
       if (course_code == "") {
         document.getElementById("resultCourse1").hidden = true
         document.getElementById("resultCourse2").hidden = true
@@ -191,13 +191,13 @@
         console.log("what")
         document.cookie = "code="+document.getElementById("courseFeild").value;
         let course_code = document.cookie.split('=')[1];
-        window.location.href="http://localhost/Courses-Brown-Scraper/index2.html";
+        window.location.href="https://john1114.github.io/Courses-Brown-Scraper/index2.html";
       }
       function changeCourse(title) {
         console.log("what")
         document.cookie = "code="+title;
         let course_code = document.cookie.split('=')[1];
-        window.location.href="http://localhost/Courses-Brown-Scraper/index2.html";
+        window.location.href="https://john1114.github.io/Courses-Brown-Scraper/index2.html";
       }
       function setCookie() {
         console.log("what2")
