@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head onload>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Tags to overcome the github cache problem (https://stackoverflow.com/questions/24851824/how-long-does-it-take-for-github-page-to-show-changes-after-changing-index-html)-->
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+  <!-- Our CSS file-->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- D3 JS file-->
+  <script src="https://d3js.org/d3.v4.js"></script>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://john1114.github.io/Courses-Brown-Scraper/minecraft_bear.png"/>
+
+  <title>Hello, world!</title>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-light" style="background-color: #cfcfcf; color: black;">
+  <a class="navbar-brand" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+    <img src="https://john1114.github.io/Courses-Brown-Scraper/minecraft_bear.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    Courses @ Brown 2.0
+  </a>
+</nav>
+<br>
+<!-- Cards -->
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Search for your course (enter course code):</label>
+              <input type="text" class="form-control" id="courseFeild" value="" placeholder="Eg. CSCI 0170" onchange="setCookie()">
+              <br>
+              <button type="button" class="btn-grey btn" onclick="searchCourse2();">Search</button>
+            </div>
+          </form>
+          <hr>
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action list-group-item-secondary" id="resultCourse1">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" id="topResultName"></h5>
+              </div>
+              <small id="topResultDescription"></small>
+              <br>
+              <small id="topResultPreReqs"></small>
+            </div>
+            <a href="#" class="list-group-item list-group-item-action" id="resultCourse2" onclick="changeCourse(document.getElementById('resultName2').innerHTML.split(':')[0]);">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" id="resultName2"></h5>
+              </div>
+              <small class="text-muted" id="resultDescription2"></small>
+              <br>
+              <small id="resultPreReqs2"></small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" id="resultCourse3" onclick="changeCourse(document.getElementById('resultName3').innerHTML.split(':')[0]);">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" id="resultName3"></h5>
+              </div>
+              <small class="text-muted" id="resultDescription3"></small>
+              <br>
+              <small id="resultPreReqs3"></small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" id="resultCourse4" onclick="changeCourse(document.getElementById('resultName4').innerHTML.split(':')[0]);">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" id="resultName4"></h5>
+              </div>
+              <small class="text-muted" id="resultDescription4"></small>
+              <br>
+              <small id="resultPreReqs4"></small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" id="resultCourse5" onclick="changeCourse(document.getElementById('resultName5').innerHTML.split(':')[0]);">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" id="resultName5"></h5>
+              </div>
+              <small class="text-muted" id="resultDescription5"></small>
+              <br>
+              <small id="resultPreReqs5"></small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="card">
+        <h5 class="card-header">Course Map</h5>
+        <div class="card-body">
+          <p> Diagram of Courses using JS will be here</p>
+          <p id="prereqDisplay">Prerequisites: </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript Source -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+<!-- Our JavaScript File-->
+<script src="lemagic.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="jquery-csv.js"></script>
+<script type="text/javascript">
+  d3.csv("https://john1114.github.io/Courses-Brown-Scraper/courses2.csv", function(data) {
+    if (course_code == "") {
+      document.getElementById("resultCourse1").hidden = true
+      document.getElementById("resultCourse2").hidden = true
+      document.getElementById("resultCourse3").hidden = true
+    }
+    else {
+      resultCourseCodes = getCourseResults(data, course_code)
+      input_subject = course_code.split(" ")[0].toLowerCase()
+      console.log(resultCourseCodes)
+      if (resultCourseCodes.length == 0) {
+        document.getElementById("topResultDescription").innerHTML = "No Results"
+      }
+      i = 0
+      while (true) {
+        if (i == data.length) {
+          console.log("No result")
+          document.getElementById("topResultDescription").innerHTML = "No Results"
+          break;
+        } else if (data[i]["subject"].toLowerCase() == input_subject) {
+          startIndex = i
+          break;
+        }
+        i += 1
+      }
+      console.log(startIndex)
+      console.log(resultCourseCodes.length)
+      i = 0
+      while (true) {
+        console.log(i)
+        console.log(resultCourseCodes[i].toLowerCase())
+        if (i == 5) {
+          break;
+        } else {
+          n = startIndex
+          while (true) {
+            // .split(0, resultCourseCodes[i].length))
+            if (n == data.length || n > 7000) {
+              console.log("No result")
+              document.getElementById("topResultDescription").innerHTML = "No Results"
+              break;
+            } else if (resultCourseCodes[i].toLowerCase() == data[n]["code"].toLowerCase().slice(0, resultCourseCodes[i].length)) {
+              console.log(data[n]["code"].toLowerCase().slice(0, resultCourseCodes[i].length))
+              if (i == 0) {
+                document.getElementById("topResultName").innerHTML = data[n]["code"]+": "+data[n]["name"]
+                document.getElementById("topResultDescription").innerHTML = data[n]["info"].slice(2, -2)
+                document.getElementById("topResultPreReqs").innerHTML = "<b>Prerequisites:</b> "+data[n]["prereqs"]
+              } else {
+                idName = "resultName"+(i+1)
+                idDesc = "resultDescription"+(i+1)
+                idPreqs = "resultPreReqs"+(i+1)
+                document.getElementById(idName).innerHTML = data[n]["code"]+": "+data[n]["name"]
+                document.getElementById(idDesc).innerHTML = data[n]["info"].slice(2, 140)+"..."
+                document.getElementById(idPreqs).innerHTML = "<b>Prerequisites:</b> "+data[n]["prereqs"]
+              }
+              break;
+            }
+            n += 1
+          }
+        }
+        i += 1
+      }
+      document.getElementById("resultCourse1").hidden = false
+      document.getElementById("resultCourse2").hidden = false
+      document.getElementById("resultCourse3").hidden = false
+      console.log("b"+course_code)
+    }
+    console.log(data);
+  });
+
+  let course_code = document.cookie.split('=')[1];
+  document.getElementById("courseFeild").value = course_code;
+
+  function searchCourse2() {
+    console.log("what")
+    document.cookie = "code="+document.getElementById("courseFeild").value;
+    let course_code = document.cookie.split('=')[1];
+    window.location.href="https://john1114.github.io/Courses-Brown-Scraper/index2.html";
+  }
+  function changeCourse(title) {
+    console.log("what")
+    document.cookie = "code="+title;
+    let course_code = document.cookie.split('=')[1];
+    window.location.href="https://john1114.github.io/Courses-Brown-Scraper/index2.html";
+  }
+  function setCookie() {
+    console.log("what2")
+    document.cookie = "code="+document.getElementById("courseFeild").value;
+    let course_code = document.cookie.split('=')[1];
+  }
+  function getCourseResults(csvData, input_code) {
+    i = 0
+    subject = input_code.split(" ")[0].toLowerCase()
+    input_number = input_code.split(" ")[1].replace(/\D/g,'')
+    console.log(subject)
+    course_numbers = []
+    output_course_numbers = []
+    proximity_list = []
+    output_courses = []
+    while (true) {
+      if (i == csvData.length) {
+        break;
+      } else if (csvData[i]["subject"].toLowerCase() == subject) {
+        course_numbers.push(csvData[i]["code"].split(" ")[1].replace(/\D/g,''))
+        proximity_list.push(parseInt(csvData[i]["code"].split(" ")[1].replace(/\D/g,'')) - parseInt(input_number))
+      }
+      i += 1
+    }
+    proximity_list = proximity_list.sort(function(a, b){return a - b});
+    zero_index = proximity_list.indexOf(0)
+    if (zero_index < 0) {
+      zero_index = Math.round(proximity_list.length / 2)
+    }
+    output_proximity = proximity_list.slice(zero_index, zero_index+10)
+    output_proximity2 = proximity_list.slice(0, zero_index).reverse()
+    output_proximity = output_proximity.reduce(function(arr, v, i) {
+      return arr.concat(v, output_proximity2[i]);
+    }, []);
+    i = -1
+    rawNumber = 0
+    while (true) {
+      i += 1
+      if (i == output_proximity.length) {
+        break;
+      } else if (output_proximity[i] == undefined) {
+        continue
+      } else {
+        rawNumber = parseInt(input_number)+output_proximity[i]
+        if (rawNumber.toString().length == 3) {
+          rawNumber = "0"+rawNumber.toString()
+        } else if (rawNumber.toString().length == 2) {
+          rawNumber = "00"+rawNumber.toString()
+        } else if(rawNumber.toString().length == 1) {
+          rawNumber = "000"+rawNumber.toString()
+        }
+        output_courses.push(subject+" "+rawNumber)
+      }
+
+    }
+    console.log(output_courses)
+    return output_courses;
+  }
+</script>
+</body>
+</html>
+
+

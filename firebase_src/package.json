@@ -1,0 +1,23 @@
+{
+  "name": "cab2",
+  "version": "1.0.0",
+  "description": "Upgraded courses at brown",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgrin212/cab2_hosted.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mgrin212/cab2_hosted/issues"
+  },
+  "homepage": "https://github.com/mgrin212/cab2_hosted#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "firebase": "^9.6.2"
+  }
+}
